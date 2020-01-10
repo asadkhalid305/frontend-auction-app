@@ -1,11 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import axios from "../../assets/constants";
+import router from "../../router";
 
-Vue.use(Vuex)
+const state = {}
+const mutations = {}
+const actions = {}
+const modules = {}
 
-export default new Vuex.Store({
-    state: {},
-    mutations: {},
-    actions: {},
-    modules: {}
-})
+
+export default {
+    state,
+    getters,
+    actions,
+    mutations
+};
