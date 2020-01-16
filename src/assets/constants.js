@@ -1,17 +1,18 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: ""
+  baseURL: "http://localhost:3011"
 });
 
 instance.interceptors.response.use(
   function (response) {
-    if (response.status === 200) {
-      return response;
-    }
+    // if (response.status === 200) {
+    //   return response;
+    // }
     // else if (2xx === response.status) {
     // console.log('abc')
     // }
+    return response;
   },
   function (error) {
     //wrong header data,
@@ -25,7 +26,7 @@ instance.interceptors.response.use(
       localStorage.clear();
       window.location.assign("/");
     }
-    //all delete
+    // //all delete
     else if (403 === error.response.status) {
       console.log("forbidden");
       return error.response;
