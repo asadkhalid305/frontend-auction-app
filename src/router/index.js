@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/authentication/Login.vue'
+import Login from '../views/Auth/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -12,7 +12,25 @@ const routes = [{
   {
     path: '/register',
     name: 'register',
-    component: () => import('../views/authentication/Register.vue')
+    component: () => import('../views/Auth/Register.vue')
+  },
+  {
+    path: '/recovery',
+    name: 'Recovery',
+    component: () => import('../views/Recovery'),
+    children: [{
+      path: 'token-generate',
+      name: 'tokenGenerate',
+      component: () => import('../views/Recovery/TokenGenerate.vue'),
+    }, {
+      path: 'token-verify',
+      name: 'tokenVerify',
+      component: () => import('../views/Recovery/TokenVerify.vue'),
+    }, {
+      path: 'set-password',
+      name: 'setPassword',
+      component: () => import('../views/Recovery/SetPassword.vue'),
+    }]
   },
   {
     path: '/home/',

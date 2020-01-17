@@ -9,3 +9,11 @@ export default {
   name: "App"
 };
 </script>
+
+<style>
+.btn-center {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+</style>

@@ -1,11 +1,20 @@
 <template>
-  <h1>Welcome to home</h1>
+  <div>
+    <h1>Welcome to home</h1>
+    <button @click="logout">Logout</button>
+  </div>
 </template>
 
 <script>
 import axios from "../../assets/constants";
 
 export default {
+  methods: {
+    logout() {
+      localStorage.removeItem("user");
+      this.$router.go();
+    }
+  },
   beforeCreate() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user === null) {

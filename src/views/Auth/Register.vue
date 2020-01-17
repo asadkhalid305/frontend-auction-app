@@ -8,8 +8,19 @@
             class="login100-form validate-form flex-sb flex-w"
           >
             <span class="login100-form-title p-b-32">
-              Login
+              Register
             </span>
+
+            <span class="txt1 p-b-11">
+              Name
+            </span>
+            <div
+              class="wrap-input100 validate-input m-b-36"
+              data-validate="Name is required"
+            >
+              <input v-model="name" class="input100" type="text" name="name" />
+              <span class="focus-input100"></span>
+            </div>
 
             <span class="txt1 p-b-11">
               Email
@@ -46,21 +57,36 @@
               <span class="focus-input100"></span>
             </div>
 
+            <span class="txt1 p-b-11">
+              Repeat Password
+            </span>
+            <div
+              class="wrap-input100 validate-input m-b-12"
+              data-validate="Password doesn't match"
+            >
+              <span class="btn-show-pass">
+                <i class="fa fa-eye"></i>
+              </span>
+              <input
+                v-model="repeatPassword"
+                class="input100"
+                type="password"
+                name="re-pass"
+              />
+              <span class="focus-input100"></span>
+            </div>
+
             <div class="flex-sb-m w-full p-b-48">
               <div>
-                <router-link class="txt3" to="/register"
-                  >Register account</router-link
+                <router-link class="txt3" to="/"
+                  >Already have an account?</router-link
                 >
-              </div>
-
-              <div>
-                <router-link class="txt3" to="/">Forget password?</router-link>
               </div>
             </div>
 
             <div class="container-login100-form-btn btn-center">
               <button class="login100-form-btn btn-center">
-                Login
+                Register
               </button>
             </div>
           </form>
@@ -80,35 +106,33 @@ export default {
   name: "login",
   data() {
     return {
+      name: "",
       email: "",
-      password: ""
+      password: "",
+      repeatPassword: ""
     };
   },
   methods: {
     submit() {
-      const values = {
-        email: this.email,
-        password: this.password
-      };
+      if (this.password === this.repeatPassword) {
+        const values = {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        };
 
-      axios
-        .post(`auth/login`, values)
-        .then(res => {
-          localStorage.setItem("user", JSON.stringify(res.data.data));
-          this.$router.push("/home/");
-        })
-        .catch(err => console.error);
+        axios
+          .post(`auth/signup`, values)
+          .then(res => {
+            console.log(res.data);
+            localStorage.setItem("user", JSON.stringify(res.data.data));
+            this.$router.push("/home/");
+          })
+          .catch(err => console.error);
+      } else {
+        console.log(`passwords didn't match`);
+      }
     }
-  },
-  beforeCreate() {
-    if (JSON.parse(localStorage.getItem("user"))) {
-      this.$router.push("/home/");
-    }
-  },
-  created() {
-    // if (this.$route.params.fromRecovery) {
-    //   localStorage.clear();
-    // }
   }
 };
 </script>
@@ -116,10 +140,4 @@ export default {
 <style scoped>
 @import url("../../assets/css/login/main.css");
 @import url("../../assets/css/login/util.css");
-
-.btn-center {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-}
 </style>
