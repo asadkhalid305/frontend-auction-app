@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app clipped-left>
+  <v-app-bar id="header" app clipped-left>
     <v-app-bar-nav-icon @click.stop="toggleNav" />
     <v-toolbar-title>Application</v-toolbar-title>
     <!-- <v-app-bar>Logout</v-app-bar> -->

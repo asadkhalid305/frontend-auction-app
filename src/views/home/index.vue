@@ -3,8 +3,9 @@
     <Navigation v-bind:drawer="drawerState" />
     <Header @navState="toggleNav" />
     <Footer />
-
-    <router-view></router-view>
+    <Content>
+      <router-view></router-view>
+    </Content>
   </v-app>
 </template>
 
@@ -13,6 +14,7 @@ import axios from "../../assets/constants";
 import Footer from "../../components/layout/Footer";
 import Header from "../../components/layout/Header";
 import Navigation from "../../components/layout/Navigation";
+import Content from "../../components/layout/Content";
 
 export default {
   data() {
@@ -20,7 +22,7 @@ export default {
       drawerState: null
     };
   },
-  components: { Footer, Header, Navigation },
+  components: { Footer, Header, Navigation, Content },
   created() {
     this.$vuetify.theme.dark = true;
   },
@@ -35,7 +37,7 @@ export default {
       this.$router.push("/");
     } else {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-      axios.defaults.headers.common["Userid"] = user.id;
+      axios.defaults.headers.common["user_id"] = user.id;
       axios.defaults.headers.common["Content-Type"] = "application/json";
     }
   }
