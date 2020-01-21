@@ -133,6 +133,9 @@ export default {
         console.log(`passwords didn't match`);
       }
     }
+  },
+  created() {
+    localStorage.removeItem(["user_reset"]);
   }
 };
 </script>

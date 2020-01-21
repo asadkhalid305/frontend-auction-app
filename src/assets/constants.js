@@ -12,14 +12,14 @@ instance.interceptors.response.use(
     //wrong header data,
     if (400 === error.response.status) {
       console.log("bad request");
-      Promise.reject(error);
+      return Promise.reject(error);
     }
     //login, new password, change password (new password), all add, all update
     else if (401 === error.response.status) {
       console.log("unautherized");
+      localStorage.removeItem('user_reset');
+      window.location.assign("/");
       return Promise.reject(error);
-      // localStorage.clear();
-      // window.location.assign("/");
     }
     // //all delete
     else if (403 === error.response.status) {

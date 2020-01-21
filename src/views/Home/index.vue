@@ -1,18 +1,32 @@
 <template>
-  <div>
-    <h1>Welcome to home</h1>
-    <button @click="logout">Logout</button>
-  </div>
+  <v-app id="inspire">
+    <Navigation v-bind:drawer="drawerState" />
+    <Header @navState="toggleNav" />
+    <Footer />
+
+    <router-view></router-view>
+  </v-app>
 </template>
 
 <script>
 import axios from "../../assets/constants";
+import Footer from "../../components/layout/Footer";
+import Header from "../../components/layout/Header";
+import Navigation from "../../components/layout/Navigation";
 
 export default {
+  data() {
+    return {
+      drawerState: null
+    };
+  },
+  components: { Footer, Header, Navigation },
+  created() {
+    this.$vuetify.theme.dark = true;
+  },
   methods: {
-    logout() {
-      localStorage.removeItem("user");
-      this.$router.go();
+    toggleNav(val) {
+      this.drawerState = val;
     }
   },
   beforeCreate() {

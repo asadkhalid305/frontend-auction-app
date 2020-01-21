@@ -71,25 +71,21 @@
         </div>
       </div>
     </div>
-    <DialogFormsHandler v-bind:dialogNo="dialogCount" />
   </div>
 </template>
 
 <script>
 require("../../assets/js/main");
 import axios from "../../assets/constants";
-import DialogFormsHandler from "../../components/DialogFormsHandler";
 
 export default {
   name: "login",
   data() {
     return {
       email: "",
-      password: "",
-      dialogCount: 0
+      password: ""
     };
   },
-  components: { DialogFormsHandler },
   methods: {
     submit() {
       const values = {
@@ -104,9 +100,6 @@ export default {
           this.$router.push("/home");
         })
         .catch(err => console.error);
-    },
-    forgetPassword() {
-      this.dialogCount = 1;
     }
   },
   beforeCreate() {
@@ -115,9 +108,7 @@ export default {
     }
   },
   created() {
-    // if (this.$route.params.fromRecovery) {
-    //   localStorage.clear();
-    // }
+    localStorage.removeItem(["user_reset"]);
   }
 };
 </script>

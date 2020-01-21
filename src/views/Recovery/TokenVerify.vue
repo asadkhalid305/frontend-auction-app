@@ -54,14 +54,24 @@ export default {
   },
   methods: {
     submit() {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${this.code}`;
+      const user = JSON.parse(localStorage.getItem("user_reset"));
+      const values = { id: user.id, token: user.token };
       axios
-        .post(`recovery/token/verify`)
+        .post(`recovery/token/verify`, values)
         .then(res => {
-          console.log(res);
-          this.$router.push("/recovery/set-password");
+          this.$router.push({
+            name: "setPassword",
+            params: {
+              redirectVerify: true
+            }
+          });
         })
-        .catch(err => console.error(err));
+        .catch(err => console.log("token expired"));
+    }
+  },
+  created() {
+    if (!this.$route.params.redirectGenerate) {
+      this.$router.push("/recovery/token-generate");
     }
   }
 };

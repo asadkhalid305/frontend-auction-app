@@ -61,9 +61,13 @@ export default {
       axios
         .post(`recovery/token/generate`, values)
         .then(res => {
-          console.log(res.data.data);
-          localStorage.setItem("user", JSON.stringify(res.data.data));
-          this.$router.push("/recovery/token-verify");
+          localStorage.setItem("user_reset", JSON.stringify(res.data.data));
+          this.$router.push({
+            name: "tokenVerify",
+            params: {
+              redirectGenerate: true
+            }
+          });
         })
         .catch(err => console.log(err));
     }

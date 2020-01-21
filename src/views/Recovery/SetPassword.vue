@@ -38,7 +38,7 @@
                 <input
                   v-model="newPassword"
                   class="input100"
-                  type="text"
+                  type="password"
                   name="newPassword"
                 />
                 <span class="focus-input100"></span>
@@ -66,15 +66,17 @@ export default {
   data() {
     return {
       password: "",
-      newPassword: "",
-      user: ""
+      newPassword: ""
     };
   },
   methods: {
     submit() {
+      const user = JSON.parse(localStorage.getItem("user_reset"));
+
       if (this.password === this.newPassword) {
         const values = {
-          id: this.user.id,
+          id: user.id,
+          token: user.token,
           password: this.password
         };
 
@@ -86,12 +88,16 @@ export default {
           })
           .catch(err => console.error(err));
       } else {
-        console.log("Confirm Password missmatched");
+        console.log("Confirm password mismatched");
       }
     }
   },
-  mounted() {
-    this.user = JSON.parse(localStorage.getItem("user"));
+  created() {
+    if (!this.$route.params.redirectGenerate) {
+      this.$router.push("/recovery/token-generate");
+    } else if (!this.$route.params.redirectVerify) {
+      this.$router.push("/recovery/token-verify");
+    }
   }
 };
 </script>
