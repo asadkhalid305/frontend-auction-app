@@ -55,9 +55,24 @@ const routes = [{
           },
           {
             path: 'add',
-            name: 'addAPp',
+            name: 'addApp',
             component: () => import('../views/home/application/Add.vue')
-          }
+          },
+          {
+            path: 'append-users',
+            name: 'appendUsers',
+            component: () => import('../views/home/application/AppendUsers.vue')
+          },
+          {
+            path: 'append-products',
+            name: 'appendProducts',
+            component: () => import('../views/home/application/AppendProducts.vue')
+          },
+          {
+            path: 'view-products',
+            name: 'viewProduct',
+            component: () => import('../views/home/application/ProductList.vue')
+          },
         ]
       }
       // {

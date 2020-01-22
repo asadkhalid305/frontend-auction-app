@@ -59,7 +59,7 @@ export default {
       };
 
       axios
-        .post(`recovery/token/generate`, values)
+        .get(`recovery/token/generate?email=${this.email}`)
         .then(res => {
           localStorage.setItem("user_reset", JSON.stringify(res.data.data));
           this.$router.push({

@@ -4,7 +4,7 @@
       <router-link exact to="/home/application/add">Add New App</router-link>
     </v-btn>
     <div v-for="item in items" :key="item.id">
-      <CardApp :someData="item" />
+      <CardApp :appData="item" @itemClicked="remove" />
     </div>
   </div>
 </template>
@@ -20,6 +20,17 @@ export default {
       items: []
     };
   },
+  methods: {
+    remove() {
+      axios
+        .delete(`/app/remove`)
+        .then(res => {
+          const deletedApp = res.data.data;
+          this.items = this.items.filter(item => item._id !== deletedApp._id);
+        })
+        .catch(err => console.error);
+    }
+  },
   mounted() {
     axios
       .get(`/app/fetch`)
@@ -30,9 +41,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.custom {
-  display: flex;
-}
-</style>

@@ -81,7 +81,7 @@ export default {
         };
 
         axios
-          .post(`recovery/password/new`, values)
+          .patch(`recovery/password/new`, values)
           .then(res => {
             localStorage.setItem("user", JSON.stringify(res.data.data));
             this.$router.push("/home");
