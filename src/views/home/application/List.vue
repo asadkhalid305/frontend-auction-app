@@ -37,7 +37,9 @@ export default {
       .then(res => {
         this.items = res.data.data;
       })
-      .catch(err => console.error);
+      .catch(err => {
+        console.error;
+      });
   }
 };
 </script>

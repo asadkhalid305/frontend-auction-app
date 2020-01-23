@@ -5,11 +5,11 @@
     <v-card-text>{{ item.description }}</v-card-text>
     <v-card-actions>
       <router-link exact to="/home/application/append-users">
-        <v-btn small>Users</v-btn>
+        <v-btn small @click="setHeader">Users</v-btn>
       </router-link>
       <v-spacer></v-spacer>
       <router-link exact to="/home/application/append-products">
-        <v-btn small>Products</v-btn>
+        <v-btn small @click="setHeader">Products</v-btn>
       </router-link>
       <v-spacer></v-spacer>
 
@@ -17,7 +17,7 @@
       <v-spacer></v-spacer>
 
       <router-link exact to="/home/application/view-products">
-        <v-btn small>View</v-btn>
+        <v-btn small @click="setHeader">View</v-btn>
       </router-link>
     </v-card-actions>
   </v-card>
@@ -33,10 +33,13 @@ export default {
   }),
   methods: {
     remove() {
-      axios.defaults.headers.common["app_id"] = this.item._id;
-      axios.defaults.headers.common["secret_key"] = this.item.secret_key;
+      this.setHeader();
 
       this.$emit("itemClicked");
+    },
+    setHeader() {
+      axios.defaults.headers.common["app_id"] = this.item._id;
+      axios.defaults.headers.common["secret_key"] = this.item.secret_key;
     }
   },
   created() {

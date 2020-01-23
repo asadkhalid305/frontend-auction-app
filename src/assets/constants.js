@@ -17,7 +17,7 @@ instance.interceptors.response.use(
     //login, new password, change password (new password), all add, all update
     else if (401 === error.response.status) {
       console.log("unautherized");
-      localStorage.removeItem('user_reset');
+      localStorage.clear();
       window.location.assign("/");
       return Promise.reject(error);
     }
