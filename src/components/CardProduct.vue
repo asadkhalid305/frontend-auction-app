@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="400" raised>
     <v-img
       class="white--text align-end"
-      height="200px"
+      height="22vh"
       src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
     >
       <v-card-title>{{ item.name }}</v-card-title>
@@ -40,5 +40,9 @@ a {
   color: white;
   font-weight: 500;
   font-family: "Roboto", sans-serif;
+}
+
+.mx-auto {
+  margin: 10px 0;
 }
 </style>

@@ -3,10 +3,15 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="8">
+          <h1>Add Users</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="8">
           <v-textarea
             v-model="users"
             :rules="usersRules"
-            label="Users*"
+            label="Paste json Here"
             required
           ></v-textarea>
         </v-col>

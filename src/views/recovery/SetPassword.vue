@@ -88,7 +88,7 @@ export default {
           })
           .catch(err => console.error(err));
       } else {
-        console.log("Confirm password mismatched");
+        console.error("Confirm password mismatched");
       }
     }
   },

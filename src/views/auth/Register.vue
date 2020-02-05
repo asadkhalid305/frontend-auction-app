@@ -124,13 +124,12 @@ export default {
         axios
           .post(`auth/signup`, values)
           .then(res => {
-            console.log(res.data);
             localStorage.setItem("user", JSON.stringify(res.data.data));
             this.$router.push("/home/");
           })
           .catch(err => console.error);
       } else {
-        console.log(`passwords didn't match`);
+        console.error(`passwords didn't match`);
       }
     }
   },

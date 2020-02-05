@@ -66,7 +66,7 @@ export default {
             }
           });
         })
-        .catch(err => console.log("token expired"));
+        .catch(err => console.error("token expired"));
     }
   },
   created() {

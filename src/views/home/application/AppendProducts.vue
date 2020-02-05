@@ -3,10 +3,15 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="8">
+          <h1>Add Products</h1>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="8">
           <v-textarea
             v-model="products"
             :rules="productsRules"
-            label="Products*"
+            label="Paste json here"
             required
           ></v-textarea>
         </v-col>
@@ -30,10 +35,18 @@ export default {
   methods: {
     submit() {
       if (this.valid) {
+        const app = JSON.parse(localStorage.getItem("app"));
+        console.log(JSON.parse(this.products));
         axios
-          .patch(`/app/product/add`, {
-            products: JSON.parse(this.products).products
-          })
+          .patch(
+            `/app/product/add`,
+            {
+              products: JSON.parse(this.products)
+            },
+            {
+              headers: app
+            }
+          )
           .then(res => {
             this.$router.push("/home/application/");
           })

@@ -71,7 +71,7 @@ const routes = [{
           {
             path: 'view-products',
             name: 'viewProduct',
-            component: () => import('../views/home/application/ProductList.vue')
+            component: () => import('../views/home/application/CardProduct/ProductList.vue')
           },
         ]
       }

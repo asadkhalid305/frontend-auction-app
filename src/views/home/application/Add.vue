@@ -1,6 +1,11 @@
 <template>
   <v-form v-model="valid">
     <v-container>
+       <v-row>
+        <v-col cols="12" md="8">
+          <h1>Add New App</h1>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="12" md="8">
           <v-text-field
@@ -64,7 +69,6 @@ export default {
           .post(`/app/add`, values)
           .then(res => {
             this.$router.push("/home/application/");
-            console.log(res.data);
           })
           .catch(err => console.error);
       }

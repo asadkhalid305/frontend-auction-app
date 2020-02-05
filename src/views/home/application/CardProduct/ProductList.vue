@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import axios from "../../../assets/constants";
+import axios from "../../../../assets/constants";
 
-import CardProduct from "../../../components/CardProduct";
+import CardProduct from "../../../../components/CardProduct";
 export default {
   components: { CardProduct },
   data() {
@@ -18,10 +18,13 @@ export default {
     };
   },
   mounted() {
+    const app = JSON.parse(localStorage.getItem("app"));
+
     axios
-      .get(`/app/product/fetch`)
+      .get(`/app/product/fetch`, {
+        headers: app
+      })
       .then(res => {
-        console.log(res.data.data);
         this.items = res.data.data;
       })
       .catch(err => console.error);
