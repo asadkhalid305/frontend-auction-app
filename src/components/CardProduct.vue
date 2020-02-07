@@ -13,7 +13,7 @@
     </v-card-text>
     <v-card-actions>
       <router-link exact to>
-        <v-btn text small>Place Bid</v-btn>
+        <ModalForm @click="placeBid" />
       </router-link>
     </v-card-actions>
   </v-card>
@@ -21,12 +21,17 @@
 
 <script>
 import axios from "../assets/constants";
+import ModalForm from "../components/ModalForm";
 
 export default {
   props: ["productData"],
   data: () => ({
     item: {}
   }),
+  components: { ModalForm },
+  methods: {
+    placeBid() {}
+  },
   created() {
     this.item = this.productData;
   }

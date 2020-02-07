@@ -17,6 +17,30 @@ export default {
       items: []
     };
   },
+  methods: {
+    placeBid() {
+      this.dialog = false;
+
+      const app = JSON.parse(localStorage.getItem("app"));
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      axios
+        .patch(
+          `/app/product/bid`,
+          {
+            newBid: this.amount,
+            user
+          },
+          {
+            headers: app
+          }
+        )
+        .then(res => {
+          this.items = res.data.data;
+        })
+        .catch(err => console.error);
+    }
+  },
   mounted() {
     const app = JSON.parse(localStorage.getItem("app"));
 
