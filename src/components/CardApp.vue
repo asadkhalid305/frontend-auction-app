@@ -1,8 +1,15 @@
 <template>
-  <v-card class="mx-auto" max-width="400" raised>
-    <v-card-title class="headline mb-1">{{ item.name }}</v-card-title>
-    <v-card-subtitle>{{ item.domain }}</v-card-subtitle>
-    <v-card-text>{{ item.description }}</v-card-text>
+  <v-card class="mx-auto" max-width="344" raised>
+    <v-card-title class="headline mb-1"
+      >Name: <span class="span-italic">{{ item.name }}</span>
+    </v-card-title>
+    <v-card-subtitle
+      >Domain: <span class="span-italic">{{ item.domain }}</span>
+    </v-card-subtitle>
+    <v-card-text
+      >Description:
+      <span class="span-italic">{{ item.description }}</span></v-card-text
+    >
     <v-card-actions>
       <router-link exact to="/home/application/append-users">
         <v-btn small @click="setAppInLocalStorage">Users</v-btn>
@@ -13,7 +20,9 @@
       </router-link>
       <v-spacer></v-spacer>
 
-      <v-btn small @click="remove">Delete</v-btn>
+      <router-link exact to>
+        <v-btn small @click="remove">Delete</v-btn>
+      </router-link>
       <v-spacer></v-spacer>
 
       <router-link exact to="/home/application/view-products">
@@ -54,11 +63,7 @@ export default {
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-  outline: none;
-  color: white;
-  font-weight: 500;
-  font-family: "Roboto", sans-serif;
+.span-italic {
+  font-style: italic;
 }
 </style>

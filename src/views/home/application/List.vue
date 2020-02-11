@@ -1,12 +1,17 @@
 <template>
-  <div>
-    <v-btn text absolute right large color="#fff">
-      <router-link exact to="/home/application/add">Add New App</router-link>
-    </v-btn>
-    <div v-for="item in items" :key="item.id">
-      <CardApp :appData="item" @itemClicked="remove" />
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-btn text absolute right large color="#fff">
+        <router-link exact to="/home/application/add">Add New App</router-link>
+      </v-btn>
+    </v-row>
+
+    <v-row>
+      <v-col cols="3" v-for="item in items" :key="item.id">
+        <CardApp :appData="item" @itemClicked="remove" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -33,7 +38,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`/app/fetch`)
+      .get(`/app/`)
       .then(res => {
         this.items = res.data.data;
       })

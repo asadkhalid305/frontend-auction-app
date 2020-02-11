@@ -62,6 +62,7 @@ export default {
           this.$router.push({
             name: "setPassword",
             params: {
+              ...this.$route.params,
               redirectVerify: true
             }
           });

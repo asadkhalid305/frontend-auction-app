@@ -2,7 +2,6 @@
   <v-app-bar id="header" app clipped-left>
     <v-app-bar-nav-icon @click.stop="toggleNav" />
     <v-toolbar-title>Application</v-toolbar-title>
-    <!-- <v-app-bar>Logout</v-app-bar> -->
     <v-btn text absolute right large color="#fff" @click="logout">Logout</v-btn>
   </v-app-bar>
 </template>
@@ -23,6 +22,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

@@ -33,17 +33,17 @@ const routes = [{
     }]
   },
   {
+    path: '/bidding-app',
+    name: 'bidding-app',
+    component: () => import('../views/home/application/CardProduct/List.vue'),
+  },
+  {
     path: '/home/',
     name: 'home',
     component: () => import('../views/home'),
     children: [{
         path: 'dashboard/',
         component: () => import('../views/home/dashboard'),
-        // children: [{
-        //   path: '',
-        //   name: 'create',
-        //   component: () => import('../views/home/dashboard/Create.vue')
-        // }]
       },
       {
         path: 'application/',
@@ -71,10 +71,12 @@ const routes = [{
           {
             path: 'view-products',
             name: 'viewProduct',
-            component: () => import('../views/home/application/CardProduct/ProductList.vue')
+            component: () => import('../views/home/application/CardProduct/List.vue')
           },
         ]
       }
+
+
       // {
       //   path: 'users/',
       //   component: () => import('./views/Home/Users/index.vue'),

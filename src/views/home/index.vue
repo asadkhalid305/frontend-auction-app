@@ -1,10 +1,12 @@
 <template>
   <v-app id="inspire">
-    <Navigation class="nav" v-bind:drawer="drawerState" />
-    <Header class="headerWrapper" @navState="toggleNav" />
+    <Navigation id="nav" v-bind:drawer="drawerState" />
+    <Header id="headerWrapper" @navState="toggleNav" />
     <Footer />
-    <Content class="contentWrapper">
-      <router-view></router-view>
+    <Content id="contentWrapper">
+      <div id="router-view">
+        <router-view></router-view>
+      </div>
     </Content>
   </v-app>
 </template>
@@ -45,17 +47,21 @@ export default {
 </script>
 
 <style scoped>
-.contentWrapper {
-  margin-top: 7vh;
-  margin-left: 13vw;
-  width: 87vw;
-}
-
-.headerWrapper {
+#headerWrapper {
   height: 7vh;
 }
 
-.nav {
+#nav {
   width: 13vw;
+}
+
+#contentWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#router-view {
+  width: 86vw;
+  margin: 7vh 0;
 }
 </style>

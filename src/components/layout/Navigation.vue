@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer id="nav" v-model="drawerState" app clipped>
-    <v-list dense>
+    <v-list>
       <v-list-item link>
         <v-list-item-action>
           <v-icon>mdi-view-dashboard</v-icon>
@@ -42,6 +42,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>
