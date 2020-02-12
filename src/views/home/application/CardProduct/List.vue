@@ -1,11 +1,22 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="3" v-for="item in items" :key="item.id">
-        <CardProduct :productData="item" @bid="updateBid" />
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-app id="inspire">
+    <Content id="">
+      <v-container>
+        <v-row>
+          <v-col
+            lg="3"
+            md="4"
+            sm="6"
+            xs="12"
+            v-for="item in items"
+            :key="item.id"
+          >
+            <CardProduct :productData="item" @bid="updateBid" />
+          </v-col>
+        </v-row>
+      </v-container>
+    </Content>
+  </v-app>
 </template>
 
 <script>
@@ -26,43 +37,69 @@ export default {
     updateBid(payload) {
       this.dialog = false;
 
-      const app = JSON.parse(localStorage.getItem("app"));
-      const user = JSON.parse(localStorage.getItem("user"));
+      const query = { ...this.$route.query };
+
+      let headers;
+      if (query.token) {
+        headers = {
+          headers: {
+            app_id: query.app_id,
+            user_id: query.user_id,
+            Authorization: `Bearer ${query.token}`
+          }
+        };
+      } else {
+        const app = JSON.parse(localStorage.getItem("app"));
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        headers = {
+          headers: {
+            app_id: app.app_id,
+            user_id: user.id
+          }
+        };
+      }
 
       axios
         .patch(
           `/product/bid`,
           {
             newBid: payload.amount,
-            product: payload.product,
-            user
+            product: payload.product
           },
-          {
-            headers: app
-          }
+          headers
         )
-        .then(res => {
-          // this.items = res.data.data;
-        })
+        // .then(res => {
+        //   // this.items = res.data.data;
+        // })
         .catch(err => console.error);
     }
   },
   mounted() {
-    const token = this.$route.query.token;
-    const app = JSON.parse(localStorage.getItem("app"));
-    const user = JSON.parse(localStorage.getItem("user"));
+    const query = { ...this.$route.query };
 
-    initializeSocket(user);
+    initializeSocket(query.user_id);
+
+    let headers;
+    if (query.token) {
+      headers = {
+        headers: {
+          app_id: query.app_id,
+          Authorization: `Bearer ${query.token}`
+        }
+      };
+    } else {
+      const app = JSON.parse(localStorage.getItem("app"));
+      headers = {
+        headers: {
+          app_id: app.app_id
+        }
+      };
+    }
 
     axios
-      .get(`/product/`, {
-        // headers: {
-        //   Authorization: `Bearer ${token}`
-        // }
-        headers: app
-      })
+      .get(`/product/`, headers)
       .then(res => {
-        let that = this;
         this.items = res.data.data;
         listen("emitBid", payload => {
           this.items = payload.products;

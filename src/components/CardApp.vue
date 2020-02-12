@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="344" raised>
+  <v-card max-height="308" raised>
     <v-card-title class="headline mb-1"
       >Name: <span class="span-italic">{{ item.name }}</span>
     </v-card-title>

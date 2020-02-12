@@ -13,6 +13,6 @@ export const initializeSocket = (user) => {
 //     socket.emit(event, payload, callback);
 
 export const listen = (event, callback) => {
-    // console.log('socket listener');
+    // console.log('socket listener activated');
     socket.on(event, (data) => callback(data));
 }

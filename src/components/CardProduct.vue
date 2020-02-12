@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="344" raised>
+  <v-card max-width="344" max-height="308" raised>
     <v-img
       class="white--text align-end"
       height="22vh"
@@ -25,7 +25,7 @@
 
 <script>
 import axios from "../assets/constants";
-import ModalForm from "../components/ModalForm";
+import ModalForm from "./Modals/NewBid";
 
 export default {
   props: ["productData"],
@@ -55,10 +55,6 @@ export default {
 </script>
 
 <style scoped>
-.mx-auto {
-  margin: 10px 0;
-}
-
 .span-italic {
   font-style: italic;
 }

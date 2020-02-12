@@ -3,15 +3,15 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="8">
-          <h1>Add Users</h1>
+          <h1>Add Products</h1>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" md="8">
           <v-textarea
-            v-model="users"
-            :rules="usersRules"
-            label="Paste json Here"
+            v-model="products"
+            :rules="productsRules"
+            label="Paste json here"
             required
           ></v-textarea>
         </v-col>
@@ -24,19 +24,29 @@
 </template>
 
 <script>
-import axios from "../../../assets/constants";
+import axios from "../../../../../assets/constants";
 export default {
   data: () => ({
     valid: false,
-    users: "",
-    usersRules: [v => !!v || "Users are required"]
+    products: "",
+    productsRules: [v => !!v || "Products are required"]
   }),
 
   methods: {
     submit() {
       if (this.valid) {
+        const app = JSON.parse(localStorage.getItem("app"));
+
         axios
-          .patch(`/app/user/add`, { users: JSON.parse(this.users).users })
+          .patch(
+            `/app/product/add`,
+            {
+              products: JSON.parse(this.products)
+            },
+            {
+              headers: app
+            }
+          )
           .then(res => {
             this.$router.push("/home/application/");
           })

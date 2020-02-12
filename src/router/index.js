@@ -51,22 +51,22 @@ const routes = [{
         children: [{
             path: '',
             name: 'listApp',
-            component: () => import('../views/home/application/List.vue')
+            component: () => import('../views/home/application/CardApp/List.vue')
           },
           {
             path: 'add',
             name: 'addApp',
-            component: () => import('../views/home/application/Add.vue')
+            component: () => import('../views/home/application/CardApp/Add.vue')
           },
           {
             path: 'append-users',
             name: 'appendUsers',
-            component: () => import('../views/home/application/AppendUsers.vue')
+            component: () => import('../views/home/application/CardApp/Actions/AppendUsers.vue')
           },
           {
             path: 'append-products',
             name: 'appendProducts',
-            component: () => import('../views/home/application/AppendProducts.vue')
+            component: () => import('../views/home/application/CardApp/Actions/AppendProducts.vue')
           },
           {
             path: 'view-products',
@@ -75,33 +75,6 @@ const routes = [{
           },
         ]
       }
-
-
-      // {
-      //   path: 'users/',
-      //   component: () => import('./views/Home/Users/index.vue'),
-      //   children: [{
-      //       path: '',
-      //       name: 'users',
-      //       component: () => import('./views/Home/Users/UsersList.vue')
-      //     },
-      //     {
-      //       path: 'add',
-      //       name: 'usersAdd',
-      //       component: () => import('./views/Home/Users/AddUser.vue')
-      //     },
-      //     {
-      //       path: 'update',
-      //       name: 'usersUpdate',
-      //       component: () => import('./views/Home/Users/UpdateUser.vue')
-      //     },
-      //     {
-      //       path: 'blocked',
-      //       name: 'usersBlocked',
-      //       component: () => import('./views/Home/Users/BlockedUsersList.vue')
-      //     },
-      //   ]
-      // }
     ]
   }
 ]

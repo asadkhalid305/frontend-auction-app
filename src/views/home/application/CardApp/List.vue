@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <v-row>
-      <v-btn text absolute right large color="#fff">
+    <v-row class="flex-end">
+      <v-btn text right large color="#fff">
         <router-link exact to="/home/application/add">Add New App</router-link>
       </v-btn>
     </v-row>
 
     <v-row>
-      <v-col cols="3" v-for="item in items" :key="item.id">
+      <v-col lg="3" md="4" sm="6" xs="12" v-for="item in items" :key="item.id">
         <CardApp :appData="item" @itemClicked="remove" />
       </v-col>
     </v-row>
@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import axios from "../../../assets/constants";
+import axios from "../../../../assets/constants";
 
-import CardApp from "../../../components/CardApp";
+import CardApp from "../../../../components/CardApp";
 export default {
   components: { CardApp },
   data() {
@@ -48,3 +48,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

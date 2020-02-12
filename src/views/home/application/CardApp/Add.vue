@@ -1,7 +1,7 @@
 <template>
   <v-form v-model="valid">
     <v-container>
-       <v-row>
+      <v-row>
         <v-col cols="12" md="8">
           <h1>Add New App</h1>
         </v-col>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import axios from "../../../assets/constants";
+import axios from "../../../../assets/constants";
 export default {
   data: () => ({
     valid: false,

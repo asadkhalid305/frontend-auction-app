@@ -20,7 +20,10 @@
               </v-col>
             </v-row>
             <v-row v-show="isSubmitDisabled">
-              <small>Bid must be greater than current bid</small>
+              <small
+                >Bid must be greater than current bid and less than 10
+                digits</small
+              >
             </v-row>
           </v-container>
         </v-card-text>
@@ -43,7 +46,7 @@
 </template>
 
 <script>
-import axios from "../assets/constants";
+import axios from "../../assets/constants";
 
 export default {
   props: ["product"],
@@ -56,8 +59,7 @@ export default {
   },
   watch: {
     amount() {
-      console.log(typeof this.amount, typeof this.product.current_bid);
-      this.amount > Number(this.product.current_bid)
+      this.amount > Number(this.product.current_bid) && this.amount.length < 10
         ? (this.isSubmitDisabled = false)
         : (this.isSubmitDisabled = true);
     }

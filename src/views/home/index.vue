@@ -1,10 +1,10 @@
 <template>
   <v-app id="inspire">
-    <Navigation id="nav" v-bind:drawer="drawerState" />
+    <Navigation id="nav" :drawer="drawerState" />
     <Header id="headerWrapper" @navState="toggleNav" />
     <Footer />
-    <Content id="contentWrapper">
-      <div id="router-view">
+    <Content :class="drawerState ? 'flex-end' : 'flex-center'">
+      <div :class="drawerState ? 'width-short' : 'width-full'">
         <router-view></router-view>
       </div>
     </Content>
@@ -21,7 +21,7 @@ import Content from "../../components/layout/Content";
 export default {
   data() {
     return {
-      drawerState: null
+      drawerState: true
     };
   },
   components: { Footer, Header, Navigation, Content },
@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 #headerWrapper {
   height: 7vh;
 }
@@ -55,13 +55,29 @@ export default {
   width: 13vw;
 }
 
-#contentWrapper {
+.flex-end {
   display: flex;
   justify-content: flex-end;
 }
 
-#router-view {
-  width: 86vw;
-  margin: 7vh 0;
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.width-short {
+  width: 85vw;
+  margin: 10vh 0;
+}
+
+.width-full {
+  width: 100vw;
+  margin: 10vh 0;
+  display: flex;
+  justify-content: center;
+
+  div {
+    width: 100vw;
+  }
 }
 </style>
