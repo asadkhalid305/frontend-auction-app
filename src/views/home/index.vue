@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 #headerWrapper {
   height: 7vh;
 }
@@ -65,6 +65,11 @@ export default {
   justify-content: center;
 }
 
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .width-short {
   width: 85vw;
   margin: 10vh 0;
@@ -79,5 +84,13 @@ export default {
   div {
     width: 100vw;
   }
+}
+
+.text-white {
+  color: white;
+}
+
+.text-italic {
+  font-style: italic;
 }
 </style>

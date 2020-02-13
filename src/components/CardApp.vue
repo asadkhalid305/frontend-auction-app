@@ -1,15 +1,22 @@
 <template>
   <v-card max-height="308" raised>
     <v-card-title class="headline mb-1"
-      >Name: <span class="span-italic">{{ item.name }}</span>
+      >Name: <span class="text-italic">{{ item.name }}</span>
     </v-card-title>
     <v-card-subtitle
-      >Domain: <span class="span-italic">{{ item.domain }}</span>
+      >Domain: <span class="text-italic">{{ item.domain }}</span>
     </v-card-subtitle>
     <v-card-text
       >Description:
-      <span class="span-italic">{{ item.description }}</span></v-card-text
-    >
+      <span class="text-italic">{{ item.description }}</span>
+    </v-card-text>
+    <v-card-text
+      >Status:
+      <span class="text-italic">{{ item.isActive }}</span>
+    </v-card-text>
+    <v-card-actions>
+      <AppDetails :appDetails="appData" />
+    </v-card-actions>
     <v-card-actions>
       <router-link exact to="/home/application/append-users">
         <v-btn small @click="setAppInLocalStorage">Users</v-btn>
@@ -21,7 +28,9 @@
       <v-spacer></v-spacer>
 
       <router-link exact to>
-        <v-btn small @click="remove">Delete</v-btn>
+        <v-btn small @click="toggleStatus">{{
+          item.isActive ? "Deactivate" : "Activate"
+        }}</v-btn>
       </router-link>
       <v-spacer></v-spacer>
 
@@ -35,16 +44,21 @@
 <script>
 import axios from "../assets/constants";
 
+import AppDetails from "../components/Modals/AppDetails";
+
 export default {
   props: ["appData"],
   data: () => ({
     item: {}
   }),
+  components: { AppDetails },
   methods: {
-    remove() {
+    toggleStatus() {
       this.setAppInLocalStorage();
 
-      this.$emit("itemClicked");
+      let status = !this.item.isActive;
+
+      this.$emit("itemClicked", status);
     },
     setAppInLocalStorage() {
       localStorage.setItem(
@@ -58,12 +72,12 @@ export default {
   },
   created() {
     this.item = this.appData;
+  },
+  watch: {
+    appData() {
+      this.item = this.appData;
+    }
   }
 };
 </script>
 
-<style scoped>
-.span-italic {
-  font-style: italic;
-}
-</style>

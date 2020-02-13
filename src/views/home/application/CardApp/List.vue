@@ -8,7 +8,7 @@
 
     <v-row>
       <v-col lg="3" md="4" sm="6" xs="12" v-for="item in items" :key="item.id">
-        <CardApp :appData="item" @itemClicked="remove" />
+        <CardApp :appData="item" @itemClicked="toggleStatus" />
       </v-col>
     </v-row>
   </v-container>
@@ -26,12 +26,28 @@ export default {
     };
   },
   methods: {
-    remove() {
+    toggleStatus(status) {
+      const app = JSON.parse(localStorage.getItem("app"));
+
+      const headers = {
+        headers: {
+          app_id: app.app_id,
+          secret_key: app.secret_key
+        }
+      };
       axios
-        .delete(`/app/remove`)
+        .patch(`/app/status`, { status }, headers)
         .then(res => {
-          const deletedApp = res.data.data;
-          this.items = this.items.filter(item => item._id !== deletedApp._id);
+          const modifiedApp = res.data.data;
+          const tempArray = this.items;
+
+          const index = tempArray.findIndex(
+            item => item._id === modifiedApp._id
+          );
+
+          if (index > -1) tempArray[index].isActive = status;
+
+          this.items = tempArray;
         })
         .catch(err => console.error);
     }
