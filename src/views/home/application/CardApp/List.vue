@@ -39,15 +39,13 @@ export default {
         .patch(`/app/status`, { status }, headers)
         .then(res => {
           const modifiedApp = res.data.data;
-          const tempArray = this.items;
+          const temp = [...this.items];
 
-          const index = tempArray.findIndex(
-            item => item._id === modifiedApp._id
-          );
+          const index = temp.findIndex(item => item._id === modifiedApp._id);
 
-          if (index > -1) tempArray[index].isActive = status;
+          if (index > -1) temp[index].isActive = status;
 
-          this.items = tempArray;
+          this.items = temp;
         })
         .catch(err => console.error);
     }

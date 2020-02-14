@@ -9,7 +9,7 @@
             sm="6"
             xs="12"
             v-for="item in items"
-            :key="item.id"
+            :key="item._id"
           >
             <CardProduct :productData="item" @bid="updateBid" />
           </v-col>
@@ -79,6 +79,7 @@ export default {
     const query = { ...this.$route.query };
 
     initializeSocket(query.user_id);
+    listen("emitBid", payload => (this.items = payload.products));
 
     let headers;
     if (query.token) {
@@ -101,11 +102,17 @@ export default {
       .get(`/product/`, headers)
       .then(res => {
         this.items = res.data.data;
-        listen("emitBid", payload => {
-          this.items = payload.products;
-        });
       })
       .catch(err => console.error);
+
+    listen("productExpired", product => {
+      console.log("expiry listner worked. Wohoo!", product);
+      let temp = [...this.items];
+      const index = temp.findIndex(item => item._id === product._id);
+      if (index > -1) temp[index].isExpired = true;
+
+      this.items = temp;
+    });
   }
 };
 </script>

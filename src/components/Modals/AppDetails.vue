@@ -26,7 +26,7 @@
           <p
             class="text-white text-italic"
             v-for="user in appDetails.registered_users"
-            :key="user._id"
+            :key="user.id"
           >
             {{ user }}
           </p>

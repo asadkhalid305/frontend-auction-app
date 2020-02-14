@@ -11,15 +11,30 @@
     </v-img>
     <v-card-subtitle
       >Expires in:
-      <span class="text-italic">{{ item.expire }}</span></v-card-subtitle
+      <span class="text-italic">{{
+        new Date(item.expire * 1000)
+      }}</span></v-card-subtitle
     >
     <v-card-text class="text--primary">
       Current Bid:
       <span class="text-italic">{{ item.current_bid }}</span>
     </v-card-text>
-    <v-card-actions>
-      <NewBid @placeBidClicked="placeBid" :product="item" />
-    </v-card-actions>
+
+    <template v-if="item.isExpired">
+      <v-card-text class="text--primary">
+        Winner:
+        <span class="text-italic">{{ item.highest_bidder }}</span>
+      </v-card-text>
+    </template>
+    <template v-else>
+      <v-card-text class="text--primary">
+        Heighest Bidder:
+        <span class="text-italic">{{ item.highest_bidder }}</span>
+      </v-card-text>
+      <v-card-actions>
+        <NewBid @placeBidClicked="placeBid" :product="item" />
+      </v-card-actions>
+    </template>
   </v-card>
 </template>
 
@@ -43,13 +58,16 @@ export default {
       this.$emit("bid", temp);
     }
   },
-  created() {
-    this.item = this.productData;
-  },
   watch: {
     "productData.current_bid"() {
       this.item = this.productData;
+    },
+    "productData.isExpired"() {
+      this.item = this.productData;
     }
+  },
+  created() {
+    this.item = this.productData;
   }
 };
 </script>
